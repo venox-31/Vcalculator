@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="Calculetor.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VCACULATOR</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #e0e5ec;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .calculator {
+        background: #e0e5ec;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow:  20px 20px 60px #bebebe,
+                     -20px -20px 60px #ffffff;
+        width: 320px;
+    }
+
+    #display {
+        width: 100%;
+        padding: 20px;
+        font-size: 32px;
+        border-radius: 15px;
+        border: none;
+        background: #e0e5ec;
+        box-shadow: inset 5px 5px 10px #bebebe,
+                    inset -5px -5px 10px #ffffff;
+        margin-bottom: 25px;
+        text-align: right;
+        outline: none;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 70px);
+        grid-gap: 20px;
+        justify-content: center;
+    }
+
+    button {
+        padding: 20px;
+        font-size: 22px;
+        border-radius: 15px;
+        border: none;
+        background: #e0e5ec;
+        box-shadow:  5px 5px 10px #bebebe,
+                     -5px -5px 10px #ffffff;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    button:hover {
+        box-shadow: inset 5px 5px 10px #bebebe,
+                    inset -5px -5px 10px #ffffff;
+    }
+
+    .operator {
+        background: #f7a600;
+        color: #fff;
+        box-shadow:  5px 5px 10px #c97e00,
+                     -5px -5px 10px #ffb600;
+    }
+
+    .operator:hover {
+        box-shadow: inset 5px 5px 10px #c97e00,
+                    inset -5px -5px 10px #ffb600;
+    }
+
+    .clear {
+        background: #ff5c5c;
+        color: #fff;
+        grid-column: span 4;
+        box-shadow:  5px 5px 10px #c04c4c,
+                     -5px -5px 10px #ff6c6c;
+    }
+
+    .clear:hover {
+        box-shadow: inset 5px 5px 10px #c04c4c,
+                    inset -5px -5px 10px #ff6c6c;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button class="operator" onclick="appendOperator('/')">÷</button>
+
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button class="operator" onclick="appendOperator('*')">×</button>
+
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button class="operator" onclick="appendOperator('-')">-</button>
+
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="appendNumber('.')">.</button>
+        <button class="operator" onclick="calculate()">=</button>
+        <button class="operator" onclick="appendOperator('+')">+</button>
+
+        <button class="clear" onclick="clearDisplay()">C</button>
+    </div>
+</div>
+
+<script>
+    let display = document.getElementById('display');
+    let currentInput = '';
+
+    function appendNumber(num) {
+        currentInput += num;
+        display.value = currentInput;
+    }
+
+    function appendOperator(op) {
+        if (currentInput !== '') {
+            currentInput += op;
+            display.value = currentInput;
+        }
+    }
+
+    function calculate() {
+        try {
+            display.value = eval(currentInput);
+            currentInput = display.value;
+        } catch {
+            display.value = "خطأ";
+            currentInput = '';
+        }
+    }
+
+    function clearDisplay() {
+        currentInput = '';
+        display.value = '';
+    }
+</script>
+
+</body>
+</html>
